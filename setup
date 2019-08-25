@@ -16,8 +16,8 @@ brew upgrade
 
 echo "Starting brew app install..."
 
-### dev tools 
-brew cask install iterm2
+### dev tools
+# brew cask install iterm2
 
 ### Development
 brew cask install docker
@@ -25,17 +25,19 @@ brew install postgresql
 brew install redis
 
 ### Command line tools - install new ones, update others to latest version
-brew install git  # upgrade to latest
+# brew install git  # upgrade to latest
 brew install git-lfs # track large files in git https://github.com/git-lfs/git-lfs
 brew install wget
-brew install zsh
+# brew install zsh
 brew install grep
 brew install trash  # move to osx trash instead of rm
-brew install less
+# brew install less
 brew install neovim
+brew install libusb
+brew install yarn
 
 ### python
-brew install python
+# brew install python3
 
 ### node setup
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
@@ -46,25 +48,29 @@ nvm use node
 npm install -g eslint
 npm install -g concurrently
 npm install -g nodemon
+npm install -g prettify
 npm install -g tldr # https://github.com/tldr-pages/tldr
 npm install -g pm2 # https://github.com/Unitech/pm2
 
 ### code editor
-brew cask install visual-studio-code
+# brew cask install visual-studio-code
 
-### notes 
-brew cask install notion
+### notes
+# brew cask install notion
+brew cask install typora
 
-### utils 
-brew cask install google-chrome
+### utils
+# brew cask install google-chrome
 brew cask install firefox
 brew cask install alfred
 brew cask install caffeine  # keep computer from sleeping
+brew cask install postman
+brew cask install qt-creator
 brew cask install spotify
 
 ### chat/communication
-brew cask install slack
-brew cask install zoomus
+# brew cask install slack
+# brew cask install zoomus
 
 ### run brew cleanup
 brew cleanup
@@ -83,6 +89,38 @@ osascript -e 'tell application "System Preferences" to quit'
 
 # keep folders on top when sorting by name
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
+
+# Copy text from Quick Look
+defaults write com.apple.finder QLEnableTextSelection -bool true
+
+# Kill Dashboard
+defaults write com.apple.dashboard mcx-disabled -boolean TRUE
+
+# Disable Notification Center
+launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist killall NotificationCenter
+
+# System Preferences > Mission Control > do not automatically rearrange Spaces based on most recent use
+defaults write com.apple.dock mru-spaces -bool false
+
+# Show the ~/Library folder
+chflags nohidden ~/Library
+
+# Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window
+defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+
+# Make hidden apps transluscent on the Dock
+defaults write com.apple.Dock showhidden -bool TRUE
+
+# Full keyboard access for all modals
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+
+# Enable Develop menu in Safari
+defaults write com.apple.Safari IncludeDevelopMenu -bool true
+defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
+
+# 24-hour clock
+defaults write com.apple.menuextra.clock DateFormat -string 'EEE MMM d  H:mm'
 
 # save to disk (not to iCloud) by default
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
@@ -104,8 +142,8 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
 # disable PowerChime on Mac 💆
-defaults write com.apple.PowerChime ChimeOnNoHardware -bool true
-killall PowerChime
+# defaults write com.apple.PowerChime ChimeOnNoHardware -bool true
+# killall PowerChime
 
 # Use list view in all Finder windows by default
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
@@ -113,6 +151,9 @@ defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
 # Minimize windows into their application’s icon
 defaults write com.apple.dock minimize-to-application -bool true
+
+# Use "suck" effect in the dock
+defaults write com.apple.dock mineffect -string suck; killall Docko
 
 # Menu bar: hide the Time Machine, User icons, but show the volume Icon.
 for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
@@ -144,7 +185,7 @@ defaults write com.apple.screencapture location -string "$HOME/Desktop"
 defaults write com.apple.screencapture type -string "png"
 
 # Disable shadow in screenshots
-defaults write com.apple.screencapture disable-shadow -bool true
+# defaults write com.apple.screencapture disable-shadow -bool true
 
 # Trackpad: enable tap to click for this user and for the login screen
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
@@ -195,13 +236,13 @@ defaults write com.apple.ActivityMonitor SortDirection -int 0
 defaults write ~/Library/Preferences/us.zoom.config.plist ZDisableVideo 1
 
 echo ""
-echo "Done!" 
+echo "Done!"
 echo ""
 echo ""
-echo "################################################################################" 
+echo "################################################################################"
 echo ""
 echo ""
-echo "Note that some of these changes require a logout/restart to take effect." 
+echo "Note that some of these changes require a logout/restart to take effect."
 echo ""
 echo ""
 echo -n "Check for and install available OSX updates, install, and automatically restart? (y/n)? "
