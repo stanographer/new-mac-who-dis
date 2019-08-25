@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+# !/usr/bin/env bash
 
 echo "new mac who dis?"
 
@@ -97,16 +97,13 @@ defaults write com.apple.finder QLEnableTextSelection -bool true
 defaults write com.apple.dashboard mcx-disabled -boolean TRUE
 
 # Disable Notification Center
-launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist killall NotificationCenter
+# launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist killall NotificationCenter
 
 # System Preferences > Mission Control > do not automatically rearrange Spaces based on most recent use
 defaults write com.apple.dock mru-spaces -bool false
 
 # Show the ~/Library folder
 chflags nohidden ~/Library
-
-# Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window
-defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
 # Make hidden apps transluscent on the Dock
 defaults write com.apple.Dock showhidden -bool TRUE
@@ -156,11 +153,11 @@ defaults write com.apple.dock minimize-to-application -bool true
 defaults write com.apple.dock mineffect -string suck; killall Docko
 
 # Menu bar: hide the Time Machine, User icons, but show the volume Icon.
-for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
-	defaults write "${domain}" dontAutoLoad -array \
-		"/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
-		"/System/Library/CoreServices/Menu Extras/User.menu"
-done
+# for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
+# 	defaults write "${domain}" dontAutoLoad -array \
+# 		"/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
+# 		"/System/Library/CoreServices/Menu Extras/User.menu"
+# done
 defaults write com.apple.systemuiserver menuExtras -array \
 	"/System/Library/CoreServices/Menu Extras/Volume.menu" \
 	"/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
@@ -192,7 +189,7 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
 # Disable force click and haptic feedback
-defaults write ~/Library/Preferences/com.apple.AppleMultitouchTrackpad.plist ForceSuppressed -bool true
+# defaults write ~/Library/Preferences/com.apple.AppleMultitouchTrackpad.plist ForceSuppressed -bool true
 
 # Enable the automatic update check
 defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
